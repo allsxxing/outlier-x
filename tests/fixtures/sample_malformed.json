@@ -1,0 +1,28 @@
+[
+  {
+    "event_id": "evt_007",
+    "sport": "football",
+    "event_date": "2024-12-29",
+    "teams": null,
+    "odds_provider": "unknown",
+    "odds": "invalid_odds",
+    "line": "not_a_number",
+    "volume": "50k",
+    "timestamp": null,
+    "data_source": ""
+  },
+  {
+    "event_id": "",
+    "sport": "INVALID_SPORT",
+    "event_date": "invalid_date_format",
+    "teams": ["Only One Team"],
+    "odds_provider": 123,
+    "odds": {
+      "team_a": 0.5
+    },
+    "line": -10.0,
+    "volume": -100,
+    "timestamp": "2024-12-29T14:30:00",
+    "data_source": null
+  }
+]

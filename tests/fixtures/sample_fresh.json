@@ -1,0 +1,47 @@
+[
+  {
+    "event_id": "evt_001",
+    "sport": "football",
+    "event_date": "2024-12-29T15:00:00",
+    "teams": ["Team A", "Team B"],
+    "odds_provider": "bet365",
+    "odds": {
+      "team_a": 1.85,
+      "team_b": 2.05
+    },
+    "line": -3.5,
+    "volume": 50000,
+    "timestamp": "2024-12-29T14:30:00",
+    "data_source": "api"
+  },
+  {
+    "event_id": "evt_002",
+    "sport": "basketball",
+    "event_date": "2024-12-29T19:30:00",
+    "teams": ["Lakers", "Celtics"],
+    "odds_provider": "draftkings",
+    "odds": {
+      "team_a": 1.95,
+      "team_b": 1.95
+    },
+    "line": 0.0,
+    "volume": 75000,
+    "timestamp": "2024-12-29T14:30:00",
+    "data_source": "api"
+  },
+  {
+    "event_id": "evt_003",
+    "sport": "baseball",
+    "event_date": "2024-12-30T20:05:00",
+    "teams": ["Yankees", "Red Sox"],
+    "odds_provider": "bet365",
+    "odds": {
+      "team_a": 2.10,
+      "team_b": 1.80
+    },
+    "line": -1.5,
+    "volume": 45000,
+    "timestamp": "2024-12-29T14:31:00",
+    "data_source": "api"
+  }
+]

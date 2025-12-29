@@ -1,0 +1,4 @@
+event_id,sport,event_date,teams,odds_provider,odds,line,volume,timestamp,data_source
+evt_004,football,2024-12-20T18:00:00,"Team C, Team D",betfair,"{""team_a"": 1.90, ""team_b"": 2.00}",2.5,30000,2024-12-20T17:30:00,csv
+evt_005,hockey,2024-12-21T19:30:00,"Rangers, Islanders",bet365,"{""team_a"": 1.88, ""team_b"": 2.02}",1.0,25000,2024-12-21T19:00:00,csv
+evt_006,basketball,2024-12-19T20:00:00,"Suns, Mavericks",draftkings,"{""team_a"": 1.85, ""team_b"": 2.05}",3.5,60000,2024-12-19T19:30:00,csv
