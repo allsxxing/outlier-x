@@ -108,8 +108,11 @@ class TestAPISource:
         mock_response.status_code = 200
         mock_get.return_value = mock_response
 
-        source = APISource("https://api.example.com/data")
-        data = source.fetch()
+        # Avoid real network call in validate_connection
+        from src.ingest import APISource as _APISource
+        with patch.object(_APISource, "validate_connection", return_value=True):
+            source = APISource("https://api.example.com/data")
+            data = source.fetch()
         assert len(data) == 1
         assert data[0]["event_id"] == "evt_001"
 
