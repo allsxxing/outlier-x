@@ -48,7 +48,7 @@ Think of it as your research assistant that never sleeps. It handles the boring 
 ## 🚀 Getting Started
 
 ### Prerequisites
-- **Python 3.9+** (If you're still on Python 2, we can't help you)
+- **Python 3.9+** (Python 3.10+ recommended for best performance)
 - pip package manager
 - (Optional) Virtual environment for isolation
 
@@ -234,7 +234,7 @@ We welcome contributions from the community! Whether you're fixing bugs, adding 
 4. **Commit with clear messages** (`git commit -m 'Add amazing feature'`)
 5. **Push and open a PR** — Reference any related issues
 
-**Pro Tip:** Check out the [COPILOT_PROMPT.md](COPILOT_PROMPT.md) for architecture details and coding standards.
+**Pro Tip:** Check the project structure and coding standards in the Development section above.
 
 ---
 
