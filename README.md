@@ -335,18 +335,20 @@ Thank you for contributing to Outlier-X!
 
 The CLI expects sports betting data with the following fields:
 
-| Field           | Type   | Required | Description                           |
-|-----------------|--------|----------|---------------------------------------|
-| `event_id`      | string | Yes      | Unique identifier for the event       |
-| `sport`         | string | Yes      | Sport type (football, basketball, etc)|
-| `event_date`    | string | Yes      | Event date (YYYY-MM-DD HH:MM:SS)     |
-| `teams`         | string | Yes      | Team names                            |
-| `odds_provider` | string | Yes      | Source of odds data                   |
-| `odds`          | dict   | Yes      | Odds values (home/away/draw)          |
-| `line`          | float  | No       | Betting line (nullable)               |
-| `volume`        | int    | Yes      | Betting volume                        |
-| `timestamp`     | string | Yes      | Data timestamp (YYYY-MM-DD HH:MM:SS) |
-| `data_source`   | string | Yes      | Source of the data                    |
+| Field           | Type   | Required | Description                                      |
+|-----------------|--------|----------|--------------------------------------------------|
+| `event_id`      | string | Yes      | Unique identifier for the event                  |
+| `sport`         | string | Yes      | Sport type (football, basketball, baseball, hockey) |
+| `event_date`    | string | Yes      | Event date (YYYY-MM-DD HH:MM:SS)                |
+| `teams`         | string | Yes      | Team names                                       |
+| `odds_provider` | string | Yes      | Source of odds data                              |
+| `odds`          | dict   | Yes      | Odds values (home/away/draw)                     |
+| `line`          | float  | No       | Betting line (nullable)                          |
+| `volume`        | int    | Yes      | Betting volume                                   |
+| `timestamp`     | string | Yes      | Data timestamp (YYYY-MM-DD HH:MM:SS)            |
+| `data_source`   | string | Yes      | Source of the data                               |
+
+**Note on CSV Format**: When using CSV files, complex data like the `odds` field (which is a dictionary/JSON object) should be represented as a JSON string with properly escaped double-quotes (e.g., `"{""home"": 1.85}"`). See `examples/sample_data.csv` for a working example.
 
 See `examples/sample_data.json` and `examples/sample_data.csv` for working examples.
 
