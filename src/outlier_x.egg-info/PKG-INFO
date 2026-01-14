@@ -1,0 +1,150 @@
+Metadata-Version: 2.4
+Name: outlier-x
+Version: 0.1.0
+Summary: Production-grade Python CLI tool for sports betting data ingestion, normalization, and validation
+Author-email: "Outlier.bet Team" <dev@outlier.bet>
+License: MIT
+Requires-Python: >=3.9
+Description-Content-Type: text/markdown
+License-File: LICENSE
+Requires-Dist: pandas<3.0.0,>=2.0.0
+Requires-Dist: pydantic<3.0.0,>=2.0.0
+Requires-Dist: click<9.0.0,>=8.0.0
+Requires-Dist: pyyaml<7.0.0,>=6.0
+Requires-Dist: python-dotenv<2.0.0,>=1.0.0
+Requires-Dist: requests<3.0.0,>=2.28.0
+Requires-Dist: sqlalchemy<3.0.0,>=2.0.0
+Requires-Dist: pyarrow<15.0.0,>=14.0.0
+Provides-Extra: dev
+Requires-Dist: pytest>=7.0.0; extra == "dev"
+Requires-Dist: pytest-cov>=4.0.0; extra == "dev"
+Requires-Dist: black>=23.0.0; extra == "dev"
+Requires-Dist: flake8>=6.0.0; extra == "dev"
+Requires-Dist: mypy>=1.0.0; extra == "dev"
+Requires-Dist: sphinx>=6.0.0; extra == "dev"
+Dynamic: license-file
+
+# Outlier-X API
+
+Welcome to the **Outlier-X Repository**. This repository contains production-grade Python CLI and tools for **Outlier.bet** data ingestion, normalization, and validation. The following documentation will guide you through setup, usage, development practices, and deployment workflows.
+
+---
+
+## Table of Contents
+- [Overview](#overview)
+- [Installation](#installation)
+- [Usage](#usage)
+  - [Quick Start Guide](#quick-start-guide)
+  - [CLI Commands](#cli-commands)
+- [Development](#development)
+- [Testing](#testing)
+- [Deployment](#deployment)
+- [Contributing](#contributing)
+
+---
+
+## Overview
+The Outlier-X project serves as the backbone for data handling at **Outlier.bet**. It provides tools for seamless data ingestion, robust validation pipelines, and normalization routines to ensure data consistency.
+
+---
+## Installation
+
+1. **Clone Repository**
+   ```bash
+   git clone https://github.com/allsxxing/outlier-x.git
+   cd outlier-x
+   ```
+
+2. **Create Python Virtual Environment**
+   ```bash
+   python3 -m venv venv
+   source venv/bin/activate  # On Windows: venv\Scripts\activate
+   ```
+
+3. **Install Dependencies**
+   ```bash
+   pip install -r requirements.txt
+   ```
+
+---
+
+## Usage
+
+### Quick Start Guide
+1. Run the CLI tool:
+   ```bash
+   python cli.py --help
+   ```
+   Example command:
+   ```bash
+   python cli.py ingest --source "example.csv"
+   ```
+
+2. Normalize data:
+   ```bash
+   python cli.py normalize --input "raw_data.json" --output "normalized_data.json"
+   ```
+
+3. Validate data:
+   ```bash
+   python cli.py validate --schema "schema.json" --data "normalized_data.json"
+   ```
+
+### CLI Commands
+| Command         | Arguments                     | Description                              |
+|-----------------|-------------------------------|------------------------------------------|
+| ingest          | `--source FILE`              | Data ingestion from a source file.       |
+| normalize       | `--input FILE --output FILE` | Normalize raw data to consistent format. |
+| validate        | `--schema FILE --data FILE`  | Validate data against the given schema.  |
+
+*(Expand the commands table for additional features.)*
+
+---
+
+## Development
+
+1. **Linting**
+   Run the linter to enforce code quality:
+   ```bash
+   ruff src tests
+   ```
+
+2. **Code Formatting**
+   Apply consistent formatting:
+   ```bash
+   black src tests
+   ```
+
+3. **Run Tests**
+   Execute all automated tests:
+   ```bash
+   pytest
+   ```
+
+---
+## Testing
+Tests are written using the [pytest](https://docs.pytest.org) framework. Run individual test files or the entire test suite as needed. Use structured data examples to build test coverage for edge cases.
+
+---
+## Deployment
+Deployment for Outlier-X tools can occur on any Python-compatible server. Optionally, containerize it using Docker for simplified scaling and portability.
+
+1. **Build Docker Image**
+   ```bash
+   docker build -t outlier-x:latest .
+   ```
+
+2. **Run Docker Container**
+   ```bash
+   docker run --rm -it outlier-x:latest
+   ```
+
+---
+
+## Contributing
+
+1. Fork the repository and create feature or bugfix branches.
+2. Ensure all changes pass linting and tests before creating a pull request.
+3. Reference issues in commits and PRs wherever applicable.
+
+Thank you for contributing to Outlier-X!
