@@ -6,6 +6,7 @@ Welcome to the **Outlier-X Repository**. This repository contains production-gra
 
 ## Table of Contents
 - [Overview](#overview)
+- [Quick Start](#quick-start)
 - [Installation](#installation)
 - [Usage](#usage)
   - [Quick Start Guide](#quick-start-guide)
@@ -19,6 +20,30 @@ Welcome to the **Outlier-X Repository**. This repository contains production-gra
 
 ## Overview
 The Outlier-X project serves as the backbone for data handling at **Outlier.bet**. It provides tools for seamless data ingestion, robust validation pipelines, and normalization routines to ensure data consistency.
+
+---
+
+## Quick Start
+
+Get up and running in 3 minutes:
+
+```bash
+# Clone and navigate to repository
+git clone https://github.com/allsxxing/outlier-x.git
+cd outlier-x
+
+# Set up virtual environment
+python3 -m venv venv
+source venv/bin/activate  # On Windows: venv\Scripts\activate
+
+# Install the package
+pip install -e .
+
+# Try it out with sample data
+outlier-x process --source json --path examples/sample_data.json --dry-run
+```
+
+That's it! You've just run the full data processing pipeline. Continue reading for detailed installation and usage instructions.
 
 ---
 ## Installation
@@ -276,3 +301,57 @@ Deployment for Outlier-X tools can occur on any Python-compatible server. Option
 3. Reference issues in commits and PRs wherever applicable.
 
 Thank you for contributing to Outlier-X!
+
+---
+
+## Troubleshooting
+
+### Common Issues
+
+**Issue: `ModuleNotFoundError: No module named 'src'`**
+- **Solution**: Make sure you've installed the package with `pip install -e .` or use `python -m src.main` instead of `outlier-x`
+
+**Issue: `outlier-x: command not found`**
+- **Solution**: Ensure you've activated your virtual environment and installed the package with `pip install -e .`
+
+**Issue: Validation errors after normalization**
+- **Expected behavior**: The normalization process converts data formats (e.g., timestamps), which may not match the validation schema. This helps identify data quality issues.
+
+**Issue: NumPy/PyArrow compatibility warnings**
+- **Solution**: These warnings don't affect functionality. To suppress them, you can downgrade NumPy: `pip install "numpy<2"`
+
+### Getting Help
+
+- Check the example data in `examples/` directory to understand the expected data format
+- Run any command with `--help` to see available options: `outlier-x <command> --help`
+- Review test files in `tests/` for usage examples
+- Open an issue on GitHub for bugs or feature requests
+
+---
+
+## Data Format Requirements
+
+### Input Data Format
+
+The CLI expects sports betting data with the following fields:
+
+| Field           | Type   | Required | Description                           |
+|-----------------|--------|----------|---------------------------------------|
+| `event_id`      | string | Yes      | Unique identifier for the event       |
+| `sport`         | string | Yes      | Sport type (football, basketball, etc)|
+| `event_date`    | string | Yes      | Event date (YYYY-MM-DD HH:MM:SS)     |
+| `teams`         | string | Yes      | Team names                            |
+| `odds_provider` | string | Yes      | Source of odds data                   |
+| `odds`          | dict   | Yes      | Odds values (home/away/draw)          |
+| `line`          | float  | No       | Betting line (nullable)               |
+| `volume`        | int    | Yes      | Betting volume                        |
+| `timestamp`     | string | Yes      | Data timestamp (YYYY-MM-DD HH:MM:SS) |
+| `data_source`   | string | Yes      | Source of the data                    |
+
+See `examples/sample_data.json` and `examples/sample_data.csv` for working examples.
+
+---
+
+## License
+
+This project is licensed under the MIT License. See the [LICENSE](LICENSE) file for details.
