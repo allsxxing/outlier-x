@@ -23,6 +23,34 @@ The Outlier-X project serves as the backbone for data handling at **Outlier.bet*
 ---
 ## Installation
 
+### Option 1: Install as a Package (Recommended)
+
+1. **Clone Repository**
+   ```bash
+   git clone https://github.com/allsxxing/outlier-x.git
+   cd outlier-x
+   ```
+
+2. **Create Python Virtual Environment**
+   ```bash
+   python3 -m venv venv
+   source venv/bin/activate  # On Windows: venv\Scripts\activate
+   ```
+
+3. **Install Package**
+   ```bash
+   pip install -e .
+   ```
+
+After installation, you can use the `outlier-x` command directly:
+```bash
+outlier-x --help
+```
+
+### Option 2: Development Setup
+
+If you want to contribute or run the CLI without installing:
+
 1. **Clone Repository**
    ```bash
    git clone https://github.com/allsxxing/outlier-x.git
@@ -40,64 +68,190 @@ The Outlier-X project serves as the backbone for data handling at **Outlier.bet*
    pip install -r requirements.txt
    ```
 
+Run CLI commands using Python module syntax:
+```bash
+python -m src.main --help
+```
+
 ---
 
 ## Usage
 
 ### Quick Start Guide
-1. Run the CLI tool:
-   ```bash
-   python cli.py --help
-   ```
-   Example command:
-   ```bash
-   python cli.py ingest --source "example.csv"
-   ```
 
-2. Normalize data:
-   ```bash
-   python cli.py normalize --input "raw_data.json" --output "normalized_data.json"
-   ```
+The CLI provides several commands for processing sports betting data. Below are common workflows:
 
-3. Validate data:
-   ```bash
-   python cli.py validate --schema "schema.json" --data "normalized_data.json"
-   ```
+#### 1. Full Pipeline (Recommended for First-Time Users)
+Process data end-to-end with a single command:
+```bash
+# Using installed package
+outlier-x process --source json --path examples/sample_data.json
+
+# Or using development setup
+python -m src.main process --source json --path examples/sample_data.json
+```
+
+This command will:
+- Ingest data from the source
+- Normalize the data format
+- Validate against schema
+- Generate reports
+
+#### 2. Individual Commands
+
+**Ingest Data:**
+```bash
+outlier-x ingest --source json --path examples/sample_data.json --output data/raw.json
+```
+
+**Normalize Data:**
+```bash
+outlier-x normalize --input data/raw.json --output data/normalized.json
+```
+
+**Validate Data:**
+```bash
+outlier-x validate --input data/normalized.json --output data/validation_report.txt
+```
+
+**Generate Report:**
+```bash
+outlier-x report --input data/normalized.json --output data/quality_report.txt
+```
+
+> **Note:** Replace `outlier-x` with `python -m src.main` if using the development setup.
 
 ### CLI Commands
-| Command         | Arguments                     | Description                              |
-|-----------------|-------------------------------|------------------------------------------|
-| ingest          | `--source FILE`              | Data ingestion from a source file.       |
-| normalize       | `--input FILE --output FILE` | Normalize raw data to consistent format. |
-| validate        | `--schema FILE --data FILE`  | Validate data against the given schema.  |
 
-*(Expand the commands table for additional features.)*
+| Command         | Description                                          | Key Options                                    |
+|-----------------|------------------------------------------------------|------------------------------------------------|
+| `process`       | Run full pipeline: ingest → normalize → validate    | `--source`, `--path`, `--output-dir`, `--dry-run` |
+| `ingest`        | Ingest data from a source (json, csv, api)          | `--source`, `--path`, `--output`, `--dry-run`  |
+| `normalize`     | Normalize raw data to consistent format             | `--input`, `--output`, `--dry-run`             |
+| `validate`      | Validate data against schema                        | `--input`, `--output`, `--strict`              |
+| `report`        | Generate data quality report                        | `--input`, `--output`                          |
+
+#### Command Options Explained
+
+- `--source`: Type of data source (`json`, `csv`, or `api`)
+- `--path`: File path for json/csv or URL for api sources
+- `--input`: Input file path for processing
+- `--output`: Output file path for results
+- `--output-dir`: Directory for multiple output files (used with `process`)
+- `--dry-run`: Preview operations without saving (useful for testing)
+- `--strict`: Fail if validation errors are found
+
+### Examples with Sample Data
+
+Try these commands with the provided example files:
+
+```bash
+# Test with JSON data
+outlier-x process --source json --path examples/sample_data.json --dry-run
+
+# Test with CSV data
+outlier-x process --source csv --path examples/sample_data.csv --dry-run
+
+# Process and save results
+outlier-x process --source json --path examples/sample_data.json --output-dir data/processed
+
+# Validate with strict mode (fail on errors)
+outlier-x ingest --source json --path examples/sample_data.json --output data/raw.json
+outlier-x normalize --input data/raw.json --output data/normalized.json
+outlier-x validate --input data/normalized.json --strict
+```
 
 ---
 
 ## Development
 
+### Code Quality Tools
+
 1. **Linting**
-   Run the linter to enforce code quality:
+   
+   Check code quality (requires installing dev dependencies):
    ```bash
-   ruff src tests
+   pip install -e ".[dev]"
+   flake8 src tests
    ```
 
 2. **Code Formatting**
+   
    Apply consistent formatting:
    ```bash
    black src tests
    ```
 
-3. **Run Tests**
-   Execute all automated tests:
+3. **Type Checking**
+   
+   Run static type checking:
    ```bash
-   pytest
+   mypy src
    ```
+
+### Running Tests
+
+Tests are written using the [pytest](https://docs.pytest.org) framework:
+
+```bash
+# Install dev dependencies if not already installed
+pip install -e ".[dev]"
+
+# Run all tests
+pytest
+
+# Run specific test file
+pytest tests/test_ingest.py
+
+# Run with coverage report
+pytest --cov=src --cov-report=html
+```
+
+### Project Structure
+
+```
+outlier-x/
+├── src/
+│   ├── main.py          # CLI entry point
+│   ├── config.py        # Configuration management
+│   ├── ingest.py        # Data ingestion logic
+│   ├── normalize.py     # Data normalization
+│   ├── validate.py      # Data validation
+│   ├── report.py        # Report generation
+│   └── utils/           # Utility modules
+├── tests/               # Test suite
+├── examples/            # Example data files
+├── pyproject.toml       # Project configuration
+└── README.md            # This file
+```
 
 ---
 ## Testing
-Tests are written using the [pytest](https://docs.pytest.org) framework. Run individual test files or the entire test suite as needed. Use structured data examples to build test coverage for edge cases.
+Tests are written using the [pytest](https://docs.pytest.org) framework. The test suite includes:
+
+- **Unit tests** for individual components
+- **Integration tests** for complete workflows
+- **Fixtures** with sample data in `tests/fixtures/`
+
+Run tests with various options:
+
+```bash
+# Run all tests with output
+pytest -v
+
+# Run specific test categories
+pytest tests/test_ingest.py -v
+pytest tests/test_normalize.py -v
+pytest tests/test_validate.py -v
+
+# Run with coverage report
+pytest --cov=src --cov-report=html --cov-report=term-missing
+
+# View HTML coverage report
+open htmlcov/index.html  # On macOS
+# or
+xdg-open htmlcov/index.html  # On Linux
+```
 
 ---
 ## Deployment
