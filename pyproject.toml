@@ -34,7 +34,10 @@ dev = [
 ]
 
 [project.scripts]
-outlier = "src.main:cli"
+outlier-x = "src.main:cli"
+
+[tool.setuptools]
+packages = ["src", "src.utils"]
 
 [tool.black]
 line-length = 100
