@@ -13,8 +13,5 @@
       "version": "3.11"
     }
   },
-  "postCreateCommand": {
-    "apt-get update && apt-get install -y ruff black pytest",
-    "source .venv/bin/activate && pip install -r requirements.txt && pytest"
-  }
+  "postCreateCommand": "apt-get update && apt-get install -y ruff black pytest && source .venv/bin/activate && pip install -r requirements.txt && pytest"
 }
